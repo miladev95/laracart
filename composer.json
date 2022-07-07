@@ -1,0 +1,42 @@
+{
+    "name": "miladev/lara-cart",
+    "description": "Laravel shopping cart",
+    "keywords": [
+        "Cart",
+        "Shopping cart",
+        "Laravel shopping cart",
+        "Laravel cart",
+        "Laravel php cart"
+    ],
+    "homepage": "https://github.com/miladev95/lara-cart",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Miladev",
+            "email": "Miladev95@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Miladev\\Phpcart\\" : "src/" 
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Miladev\\Phpcart\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Miladev\\Phpcart\\CartServiceProvider"
+            ],
+            "aliases": {
+                "Cart": "Miladev\\Phpcart\\Facades\\Cart"
+            }
+        }
+    }
+}

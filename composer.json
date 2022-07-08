@@ -21,12 +21,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Miladev\\Phpcart\\" : "src/" 
+            "Miladev\\Laracart\\" : "src/" 
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Miladev\\Phpcart\\Tests\\": "tests"
+            "Miladev\\Laracart\\Tests\\": "tests"
         }
     },
     "extra": {

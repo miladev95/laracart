@@ -32,10 +32,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Miladev\\Phpcart\\CartServiceProvider"
+                "Miladev\\Laracart\\CartServiceProvider"
             ],
             "aliases": {
-                "Cart": "Miladev\\Phpcart\\Facades\\Cart"
+                "Cart": "Miladev\\Laracart\\Facades\\Cart"
             }
         }
     }

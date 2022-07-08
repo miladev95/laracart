@@ -28,7 +28,7 @@ class Cart implements CartInterface
      *
      * @var string
      */
-    protected $name = "phpcart";
+    protected $name = "laracart";
 
     /**
      * Construct the class.

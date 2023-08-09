@@ -22,7 +22,7 @@ Laravel PHP shopping cart
 Lara-phpcart is available via Composer
 
 ```bash
-$ composer require miladev/lara-phpcart
+$ composer require miladev/lara-cart
 ```
 
 ## Integrations

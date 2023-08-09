@@ -1,4 +1,5 @@
-# Laravel Meta
+# Lara-PHPCart
+Laravel PHP shopping cart
 
 [![Latest Stable Version](https://poser.pugx.org/miladev/lara-meta/v)](//packagist.org/packages/miladev/lara-cart)
 [![License](https://poser.pugx.org/miladev/lara-meta/license)](//packagist.org/packages/miladev/lara-cart)
@@ -7,9 +8,6 @@
 <a href="https://github.com/miladev95/laracart/issues"><img src="https://img.shields.io/github/issues/miladev95/laracart.svg" alt=""></a>
 <a href="https://github.com/miladev95/laracart/stargazers"><img src="https://img.shields.io/github/stars/miladev95/laracart.svg" alt=""></a>
 <a href="https://github.com/miladev95/laracart/network"><img src="https://img.shields.io/github/forks/miladev95/laracart.svg" alt=""></a>
-
-# Lara-PHPCart
-Laravel PHP shopping cart
 
 ## Features
 

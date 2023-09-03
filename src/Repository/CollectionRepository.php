@@ -1,10 +1,11 @@
 <?php
-namespace Miladev\Laracart;
+namespace Miladev\Laracart\Repository;
 
 use Exception;
 use Illuminate\Support\Collection as IlluminateCollection;
+use Miladev\Laracart\Array;
 
-class Collection extends IlluminateCollection
+class CollectionRepository extends IlluminateCollection implements CartRepositoryInterface
 {
     /**
      * All items

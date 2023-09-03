@@ -4,8 +4,9 @@ namespace Miladev\Laracart;
 use Exception;
 use Illuminate\Support\Facades\Session;
 use InvalidArgumentException;
+use Miladev\Laracart\Repository\CollectionRepository;
 
-class Cart implements CartInterface
+abstract class Cart implements CartInterface
 {
     const CARTSUFFIX = '_cart';
 
@@ -19,7 +20,7 @@ class Cart implements CartInterface
     /**
      * Manage cart items
      *
-     * @var \Miladev\Laracart\Collection
+     * @var \Miladev\Laracart\Repository\CollectionRepository
      */
     protected $collection;
 
@@ -38,7 +39,7 @@ class Cart implements CartInterface
      */
     public function __construct($name = null)
     {
-        $this->collection = app(Collection::class);
+        $this->collection = app(CollectionRepository::class);
 
         if ($name) {
             $this->setCart($name);
@@ -76,7 +77,7 @@ class Cart implements CartInterface
      * Add an item to the cart.
      *
      * @param  Array  $product
-     * @return \Miladev\Laracart\Collection
+     * @return \Miladev\Laracart\Repository\CollectionRepository
      */
     public function add(array $product)
     {
@@ -102,7 +103,7 @@ class Cart implements CartInterface
      * Update an item.
      *
      * @param  Array  $product
-     * @return \Miladev\Laracart\Collection
+     * @return \Miladev\Laracart\Repository\CollectionRepository
      */
     public function update(array $product)
     {
@@ -131,7 +132,7 @@ class Cart implements CartInterface
      * @param mixed $id
      * @param int $quantity
      *
-     * @return \Miladev\Laracart\Collection
+     * @return \Miladev\Laracart\Repository\CollectionRepository
      */
     public function updateQty($id, $quantity)
     {
@@ -148,7 +149,7 @@ class Cart implements CartInterface
      * @param mixed $id
      * @param float $price
      *
-     * @return \Miladev\Laracart\Collection
+     * @return \Miladev\Laracart\Repository\CollectionRepository
      */
     public function updatePrice($id, $price)
     {
@@ -179,7 +180,7 @@ class Cart implements CartInterface
     /**
      * Helper wrapper for cart items.
      *
-     * @return \Miladev\Laracart\Collection
+     * @return \Miladev\Laracart\Repository\CollectionRepository
      */
     public function items()
     {
@@ -189,7 +190,7 @@ class Cart implements CartInterface
     /**
      * Get all the items.
      *
-     * @return \Miladev\Laracart\Collection
+     * @return \Miladev\Laracart\Repository\CollectionRepository
      */
     public function getItems()
     {

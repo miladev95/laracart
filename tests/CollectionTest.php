@@ -2,7 +2,7 @@
 
 namespace Miladev\Laracart\Tests;
 
-use Miladev\Laracart\Collection;
+use Miladev\Laracart\Repository\CollectionRepository;
 use Tests\TestCase;
 
 class CollectionTest extends TestCase
@@ -24,7 +24,7 @@ class CollectionTest extends TestCase
 
     public function testSetItems()
     {
-        $collection = new Collection();
+        $collection = new CollectionRepository();
 
         $collection->setItems([
             [
@@ -41,7 +41,7 @@ class CollectionTest extends TestCase
 
     public function testFindItem()
     {
-        $collection = new Collection();
+        $collection = new CollectionRepository();
 
         $collection->setItems([
             [
@@ -58,7 +58,7 @@ class CollectionTest extends TestCase
 
     public function testAnItemIsExistInCollection()
     {
-        $collection = new Collection();
+        $collection = new CollectionRepository();
 
         $collection->setItems([
             125 => [
@@ -75,7 +75,7 @@ class CollectionTest extends TestCase
 
     public function testFindAnItemInCollection()
     {
-        $collection = new Collection();
+        $collection = new CollectionRepository();
 
         $collection->setItems([
             125 => [
@@ -92,7 +92,7 @@ class CollectionTest extends TestCase
 
     public function testItemNotExistInCollection()
     {
-        $collection = new Collection();
+        $collection = new CollectionRepository();
 
         $collection->setItems([
             125 => [
@@ -109,7 +109,7 @@ class CollectionTest extends TestCase
 
     public function testInsertAnItemInCollection()
     {
-        $collection = new Collection();
+        $collection = new CollectionRepository();
 
         $collection->insert([
             'id' => 125,
@@ -126,7 +126,7 @@ class CollectionTest extends TestCase
      */
     public function testValidateAnItem()
     {
-        $collection = new Collection();
+        $collection = new CollectionRepository();
 
         $collection->validateItem([
             'id' => 125,

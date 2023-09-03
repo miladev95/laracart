@@ -16,32 +16,7 @@ Lara-phpcart is available via Composer
 ```bash
 $ composer require miladev/lara-phpcart
 ```
-
-## Integrations
-
-#### Laravel 5.5+ integrations
-
-##### Package Discovery
-`Miladev/lara-cart` utilize the Laravel's package auto discovery feature. So, you don't need to add manually Service provider and Facade in Laravel application's config/app.php. Laravel will automatically register the service provider and facades for you.
-
-#### Laravel < 5.5 integrations
-
-After you have installed the Laravel-PHPCart, open the config/app.php file which is included with Laravel and add the following lines.
-
-In the $providers array add the following service provider.
-
-```php
-'Miladev\Laracart\CartServiceProvider'
-```
-
-Add the facade of this package to the $aliases array.
-
-```php
-'Cart' => 'Miladev\Laracart\Facades\Cart'
-```
-
 You can now use this facade in place of instantiating the Cart yourself in the following examples.
-
 ## Usage
 
 ### Add Item

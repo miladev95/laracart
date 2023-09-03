@@ -8,7 +8,7 @@ class CartServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind('cart', function () {
-            return new \Miladev\Laracart\Cart;
+            return new Cart;
         });
     }
 }

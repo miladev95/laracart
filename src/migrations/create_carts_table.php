@@ -14,12 +14,13 @@ return new class extends Migration
 
 	public function up()
 	{
-		Schema::create(config('cart.table_name') ?? 'laracart', function (Blueprint $table) {
+		Schema::create(config('cart.table_name') ?? 'carts', function (Blueprint $table) {
 			$table->id();
 			$table->string('product_id');
 			$table->string('name');
 			$table->integer('quantity');
 			$table->string('price');
+            $table->timestamps();
 		});
 	}
 
@@ -30,6 +31,6 @@ return new class extends Migration
 	 */
 	public function down()
 	{
-		Schema::dropIfExists(config('cart.table_name') ?? 'laracart');
+		Schema::dropIfExists(config('cart.table_name') ?? 'carts');
 	}
 };

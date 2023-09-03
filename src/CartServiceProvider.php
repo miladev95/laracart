@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Miladev\Laracart\Repository\CartRepository;
 use Miladev\Laracart\Repository\CollectionRepository;
 use Miladev\Laracart\Repository\DBRepository;
+use function Sodium\add;
 
 class CartServiceProvider extends ServiceProvider
 {
@@ -16,13 +17,11 @@ class CartServiceProvider extends ServiceProvider
 
         $cartStorage = config('cart.storage') ?? 'db';
 
-        $instance = match ($cartStorage) {
+        match ($cartStorage) {
             "db" => app()->singleton(CartRepository::class, DBRepository::class),
             "collection" => app()->singleton(CartRepository::class, CollectionRepository::class),
             default => app()->singleton(CartRepository::class, DBRepository::class),
         };
-
-        app()->singleton(CartRepository::class,$instance);
 
         if ($this->app->runningInConsole()) {
 

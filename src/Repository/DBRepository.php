@@ -2,13 +2,13 @@
 
 namespace Miladev\Laracart\Repository;
 
-use App\Models\Cart;
-use App\Models\Product;
 use Exception;
+use Miladev\Laracart\Models\Cart;
+
 class DBRepository implements CartRepository
 {
     protected $requiredFields = [
-        'id',
+        'product_id',
         'name',
         'price',
         'quantity',
@@ -23,9 +23,9 @@ class DBRepository implements CartRepository
         return Cart::find($id)->first();
     }
 
-    public function has($product_id)
+    public function destroy($id)
     {
-        return Cart::where('product_id',$product_id)->first();
+        return Cart::find($id)->delete();
     }
 
 
@@ -35,10 +35,10 @@ class DBRepository implements CartRepository
 
 
         // If item already added, increment the quantity
-        if ($this->has($item['id'])) {
+        if (isset($item['id'])) {
             $item = $this->findItem($item['id']);
 
-            return $this->updateQty($item->id, $item->quantity + $product['quantity']);
+            return $this->updateQty($item);
         }
 
         return Cart::create($item);

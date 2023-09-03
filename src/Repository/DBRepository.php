@@ -2,37 +2,59 @@
 
 namespace Miladev\Laracart\Repository;
 
-
+use App\Models\Cart;
+use App\Models\Product;
+use Exception;
 class DBRepository implements CartRepositoryInterface
 {
 
+    protected $requiredFields = [
+        'id',
+        'name',
+        'price',
+        'quantity',
+    ];
     public function getItems()
     {
-
+        return Cart::all();
     }
 
-    public function findItem($key)
+    public function findItem($id)
     {
-        // TODO: Implement findItem() method.
+        return Cart::find($id)->first();
     }
 
-    public function has($item)
-    {
-        // TODO: Implement has() method.
-    }
 
     public function insert(array $item)
     {
-        // TODO: Implement insert() method.
+        return Cart::create($item);
     }
 
     public function update(array $item)
     {
-        // TODO: Implement update() method.
+        $cart = Cart::find($item->id)->first();
+        return $cart->update([
+            'product_id' => $item->product_id,
+            'name' => $item->name,
+            'quantity' => $item->quantity,
+            'price' => $item->price,
+        ]);
     }
 
     public function validateItem(array $item)
     {
-        // TODO: Implement validateItem() method.
+        $fields = array_diff_key(array_flip($this->requiredFields), $item);
+
+        if ($fields) {
+            throw new Exception('Some required fields missing: ' . implode(",", array_keys($fields)));
+        }
+
+        if ($item['quantity'] < 1) {
+            throw new Exception('Quantity can not be less than 1');
+        }
+
+        if (!is_numeric($item['price'])) {
+            throw new Exception('Price must be a numeric number');
+        }
     }
 }

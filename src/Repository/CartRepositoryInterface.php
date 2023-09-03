@@ -8,8 +8,6 @@ interface CartRepositoryInterface
 
     public function findItem($key);
 
-    public function has($item);
-
     public function insert(array $item);
 
     // Alias of insert

@@ -5,7 +5,7 @@ use Exception;
 use Illuminate\Support\Collection as IlluminateCollection;
 use Miladev\Laracart\Array;
 
-class CollectionRepository extends IlluminateCollection implements CartRepositoryInterface
+class CollectionRepository extends IlluminateCollection implements CartRepository
 {
     /**
      * All items

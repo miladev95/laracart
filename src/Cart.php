@@ -2,86 +2,24 @@
 namespace Miladev\Laracart;
 
 use Exception;
-use Illuminate\Support\Facades\Session;
 use InvalidArgumentException;
 use Miladev\Laracart\Repository\CollectionRepository;
 
-abstract class Cart implements CartInterface
+class Cart
 {
     const CARTSUFFIX = '_cart';
 
-    /**
-     * The Cart session,
-     *
-     * @var \Symfony\Component\HttpFoundation\Session\Session
-     */
-    protected $session;
+    private $source;
 
-    /**
-     * Manage cart items
-     *
-     * @var \Miladev\Laracart\Repository\CollectionRepository
-     */
-    protected $collection;
-
-    /**
-     * Cart name
-     *
-     * @var string
-     */
-    protected $name = "laracart";
-
-    /**
-     * Construct the class.
-     *
-     * @param  string  $name
-     * @return void
-     */
-    public function __construct($name = null)
+    public function __construct()
     {
-        $this->collection = app(CollectionRepository::class);
-
-        if ($name) {
-            $this->setCart($name);
-        }
+        $this->source = resolve(CartInterface::class);
     }
 
-    public function setCart($name)
-    {
-        if (empty($name)) {
-            throw new InvalidArgumentException('Cart name can not be empty.');
-        }
-
-        $this->name = $name . self::CARTSUFFIX;
-    }
-
-    public function getCart()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set the current cart name
-     *
-     * @param  string  $instance  Cart instance name
-     * @return StudentVIP\Cart
-     */
-    public function named($name)
-    {
-        $this->setCart($name);
-
-        return $this;
-    }
-
-    /**
-     * Add an item to the cart.
-     *
-     * @param  Array  $product
-     * @return \Miladev\Laracart\Repository\CollectionRepository
-     */
     public function add(array $product)
     {
-        $this->collection->validateItem($product);
+        $this->source->validateItem($product);
+        $this->source->insert($product);
 
         // If item already added, increment the quantity
         if ($this->has($product['id'])) {
@@ -96,7 +34,7 @@ abstract class Cart implements CartInterface
 
         Session::put($this->getCart(), $items);
 
-        return $this->collection->make($items);
+        return $this->source->make($items);
     }
 
     /**

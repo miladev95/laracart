@@ -2,20 +2,14 @@
 
 namespace Miladev\Laracart\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Cart extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $guareded = [];
 
-    /**
-     * @return string
-     */
-    public function getTable(): string
-    {
-        return config('cart.table_name') ?? 'laracart';
-    }
+
 }

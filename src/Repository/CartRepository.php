@@ -2,7 +2,7 @@
 
 namespace Miladev\Laracart\Repository;
 
-interface CartRepositoryInterface
+interface CartRepository
 {
     public function getItems();
 

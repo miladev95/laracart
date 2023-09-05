@@ -1,6 +1,14 @@
 # Lara-PHPCart
 Laravel PHP shopping cart
 
+[![Latest Stable Version](https://poser.pugx.org/miladev/lara-meta/v)](//packagist.org/packages/miladev/lara-cart)
+[![License](https://poser.pugx.org/miladev/lara-meta/license)](//packagist.org/packages/miladev/lara-cart)
+[![Total Downloads](https://poser.pugx.org/miladev/lara-meta/downloads)](//packagist.org/packages/miladev/lara-cart)
+
+<a href="https://github.com/miladev95/laracart/issues"><img src="https://img.shields.io/github/issues/miladev95/laracart.svg" alt=""></a>
+<a href="https://github.com/miladev95/laracart/stargazers"><img src="https://img.shields.io/github/stars/miladev95/laracart.svg" alt=""></a>
+<a href="https://github.com/miladev95/laracart/network"><img src="https://img.shields.io/github/forks/miladev95/laracart.svg" alt=""></a>
+
 ## Features
 
 - Simple API
@@ -14,7 +22,7 @@ Laravel PHP shopping cart
 Lara-phpcart is available via Composer
 
 ```bash
-$ composer require miladev/lara-phpcart
+$ composer require miladev/lara-cart
 ```
 You can now use this facade in place of instantiating the Cart yourself in the following examples.
 ## Usage

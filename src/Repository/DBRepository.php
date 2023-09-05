@@ -44,17 +44,26 @@ class DBRepository implements CartRepository
         $product = $this->findItem($item['product_id']);
         // If item already added, increment the quantity
         if ($product) {
-            return $this->updateQty($product);
+            return $this->increaseQty($item['product_id']);
         }
 
         $item['user_id'] = $this->user_id;
         return Cart::create($item);
     }
 
-    public function updateQty($product)
+    public function increaseQty($product_id)
     {
+        $product = $this->findItem($product_id);
         return $product->update([
             'quantity' => $product->quantity + 1,
+        ]);
+    }
+
+    public function decreaseQty($product_id)
+    {
+        $product = $this->findItem($product_id);
+        return $product->update([
+            'quantity' => $product->quantity - 1,
         ]);
     }
 

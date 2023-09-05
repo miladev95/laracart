@@ -88,6 +88,11 @@ class Cart
         return $this->source->update($item);
     }
 
+    public function decreaseQty($product_id)
+    {
+        return $this->source->decreaseQty($product_id);
+    }
+
     public function remove($product_id)
     {
         return $this->source->destroy($product_id);

@@ -12,6 +12,8 @@ interface CartRepository
 
     // Alias of insert
     public function update(array $item);
+    public function increaseQty($product_id);
+    public function decreaseQty($product_id);
 
     public function destroy($product_id);
 

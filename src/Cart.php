@@ -2,10 +2,10 @@
 namespace Miladev\Laracart;
 
 use Exception;
+use Illuminate\Auth\AuthenticationException;
 use InvalidArgumentException;
 use Miladev\Laracart\Repository\CartRepository;
-use Miladev\Laracart\Repository\CollectionRepository;
-
+use Illuminate\Support\Facades\Auth;
 class Cart
 {
     const CARTSUFFIX = '_cart';
@@ -15,6 +15,16 @@ class Cart
     public function __construct()
     {
         $this->source = resolve(CartRepository::class);
+    }
+
+    public function getItems()
+    {
+        return $this->source->getItems();
+    }
+
+    public function get($id)
+    {
+        return $this->source->findItem($id);
     }
 
     public function add(array $product)
@@ -29,9 +39,9 @@ class Cart
             return $this->updateQty($item->id, $item->quantity + $product['quantity']);
         }
 
-        $product = $this->source->insert($product);
+        $cart = $this->source->insert($product);
 
-        return $this->get($product->id);
+        return $this->get($cart);
     }
 
 
@@ -66,14 +76,7 @@ class Cart
         return $this->update($item);
     }
 
-    /**
-     * Update price of an Item.
-     *
-     * @param mixed $id
-     * @param float $price
-     *
-     * @return \Miladev\Laracart\Repository\CollectionRepository
-     */
+
     public function updatePrice($id, $price)
     {
         $item = (array) $this->get($id);
@@ -88,27 +91,13 @@ class Cart
         return $this->source->destroy($id);
     }
 
-    public function getItems()
-    {
-        return $this->source->getItems();
-    }
-
-    public function get($id)
-    {
-        return $this->source->findItem($id);
-    }
-
 
     public function has($id)
     {
         return (bool) $this->source->findItem($id);
     }
 
-    /**
-     * Get the number of Unique items in the cart
-     *
-     * @return int
-     */
+
 
     public function count()
     {
@@ -126,11 +115,7 @@ class Cart
         });
     }
 
-    /**
-     * Get the total quantities of items in the cart
-     *
-     * @return int
-     */
+
 
     public function totalQuantity()
     {
@@ -141,13 +126,7 @@ class Cart
         });
     }
 
-    /**
-     * Clone a cart to another
-     *
-     * @param  mix $cart
-     *
-     * @return void
-     */
+
 
     public function copy($cart)
     {
@@ -169,22 +148,12 @@ class Cart
 
     }
 
-    /**
-     * Alias of clear (Deprecated)
-     *
-     * @return void
-     */
 
     public function flash()
     {
         $this->clear();
     }
 
-    /**
-     * Empty cart
-     *
-     * @return void
-     */
 
     public function clear()
     {

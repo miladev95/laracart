@@ -6,7 +6,7 @@ interface CartRepository
 {
     public function getItems();
 
-    public function findItem($key);
+    public function findItem($product_id);
 
     public function insert(array $item);
 

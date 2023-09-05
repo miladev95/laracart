@@ -15,11 +15,13 @@ return new class extends Migration
 	public function up()
 	{
 		Schema::create(config('cart.table_name') ?? 'carts', function (Blueprint $table) {
-			$table->id();
-			$table->string('product_id');
+			$table->unsignedBigInteger('product_id');
 			$table->string('name');
 			$table->integer('quantity');
 			$table->string('price');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->timestamps();
 		});
 	}

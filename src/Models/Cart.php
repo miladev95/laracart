@@ -9,8 +9,8 @@ class Cart extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'product_id';
     protected $table = 'laracart';
-    protected $fillable = ['product_id','quantity','price','name'];
-
+    protected $fillable = ['product_id','quantity','price','name','user_id'];
 
 }

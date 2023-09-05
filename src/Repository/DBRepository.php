@@ -3,6 +3,7 @@
 namespace Miladev\Laracart\Repository;
 
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Miladev\Laracart\Models\Cart;
 
 class DBRepository implements CartRepository
@@ -13,19 +14,26 @@ class DBRepository implements CartRepository
         'price',
         'quantity',
     ];
+    private $user_id;
+
+    public function __construct()
+    {
+        $this->user_id = Auth::id();
+    }
+
     public function getItems()
     {
-        return Cart::all();
+        return Cart::where('user_id', $this->user_id)->get();
     }
 
-    public function findItem($id)
+    public function findItem($product_id)
     {
-        return Cart::find($id)->first();
+        return Cart::where('product_id', $product_id)->where('user_id', $this->user_id)->first();
     }
 
-    public function destroy($id)
+    public function destroy($product_id)
     {
-        return Cart::find($id)->delete();
+        return Cart::where('product_id', $product_id)->where('user_id', $this->user_id)->delete();
     }
 
 
@@ -33,27 +41,27 @@ class DBRepository implements CartRepository
     {
         $this->validateItem($item);
 
-
+        $product = $this->findItem($item['product_id']);
         // If item already added, increment the quantity
-        if (isset($item['id'])) {
-            $item = $this->findItem($item['id']);
-
-            return $this->updateQty($item);
+        if ($product) {
+            return $this->updateQty($product);
         }
+
+        $item['user_id'] = $this->user_id;
 
         return Cart::create($item);
     }
 
-    public function updateQty($item)
+    public function updateQty($product)
     {
-        return $item->update([
-            'quantity' => $item->quantity + 1,
+        return $product->update([
+            'quantity' => $product->quantity + 1,
         ]);
     }
 
     public function update(array $item)
     {
-        $cart = Cart::find($item->id)->first();
+        $cart = Cart::find($item['product_id']);
         return $cart->update([
             'product_id' => $item->product_id,
             'name' => $item->name,
@@ -78,4 +86,5 @@ class DBRepository implements CartRepository
             throw new Exception('Price must be a numeric number');
         }
     }
+
 }

@@ -1,11 +1,13 @@
 <?php
+
 namespace Miladev\Laracart;
 
 use Exception;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Support\Facades\Auth;
 use InvalidArgumentException;
 use Miladev\Laracart\Repository\CartRepository;
-use Illuminate\Support\Facades\Auth;
+
 class Cart
 {
     const CARTSUFFIX = '_cart';
@@ -41,7 +43,7 @@ class Cart
 
         $cart = $this->source->insert($product);
 
-        return $this->get($cart);
+        return $cart;
     }
 
 
@@ -57,7 +59,7 @@ class Cart
             throw new Exception('There is no item in shopping cart with id: ' . $product['id']);
         }
 
-        $item = array_merge((array) $this->get($product['id']), $product);
+        $item = array_merge((array)$this->get($product['id']), $product);
 
         $items = $this->collection->insert($item);
 
@@ -69,7 +71,7 @@ class Cart
 
     public function updateQty($id, $quantity)
     {
-        $item = (array) $this->get($id);
+        $item = (array)$this->get($id);
 
         $item['quantity'] = $quantity;
 
@@ -79,24 +81,23 @@ class Cart
 
     public function updatePrice($id, $price)
     {
-        $item = (array) $this->get($id);
+        $item = (array)$this->get($id);
 
         $item['price'] = $price;
 
         return $this->source->update($item);
     }
 
-    public function remove($id)
+    public function remove($product_id)
     {
-        return $this->source->destroy($id);
+        return $this->source->destroy($product_id);
     }
 
 
     public function has($id)
     {
-        return (bool) $this->source->findItem($id);
+        return (bool)$this->source->findItem($id);
     }
-
 
 
     public function count()
@@ -116,7 +117,6 @@ class Cart
     }
 
 
-
     public function totalQuantity()
     {
         $items = $this->getItems();
@@ -125,7 +125,6 @@ class Cart
             return $item->quantity;
         });
     }
-
 
 
     public function copy($cart)

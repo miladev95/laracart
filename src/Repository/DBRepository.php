@@ -48,7 +48,6 @@ class DBRepository implements CartRepository
         }
 
         $item['user_id'] = $this->user_id;
-
         return Cart::create($item);
     }
 

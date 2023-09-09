@@ -54,28 +54,41 @@ class DBRepository implements CartRepository
     public function increaseQty($product_id)
     {
         $product = $this->findItem($product_id);
-        return $product->update([
-            'quantity' => $product->quantity + 1,
-        ]);
+        if ($product) {
+            return $product->update([
+                'quantity' => $product->quantity + 1,
+            ]);
+        }
+
+        return null;
     }
 
     public function decreaseQty($product_id)
     {
         $product = $this->findItem($product_id);
-        return $product->update([
-            'quantity' => $product->quantity - 1,
-        ]);
+        if ($product) {
+            return $product->update([
+                'quantity' => $product->quantity - 1,
+            ]);
+        }
+
+        return null;
     }
 
     public function update(array $item)
     {
         $cart = Cart::find($item['product_id']);
-        return $cart->update([
-            'product_id' => $item->product_id,
-            'name' => $item->name,
-            'quantity' => $item->quantity,
-            'price' => $item->price,
-        ]);
+        if ($cart) {
+            return $cart->update([
+                'product_id' => $item->product_id,
+                'name' => $item->name,
+                'quantity' => $item->quantity,
+                'price' => $item->price,
+            ]);
+        }
+
+        return null;
+
     }
 
     public function validateItem(array $item)

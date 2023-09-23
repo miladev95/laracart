@@ -36,6 +36,14 @@ class DBRepository implements CartRepository
         return Cart::where('product_id', $product_id)->where('user_id', $this->user_id)->delete();
     }
 
+    /**
+     * destroy all user products
+     */
+    public function destroyAll()
+    {
+        return Cart::where('user_id',$this->user_id)->delete();
+    }
+
 
     public function insert(array $item)
     {

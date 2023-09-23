@@ -1,7 +1,7 @@
 {
     "name": "miladev/lara-cart",
     "description": "Laravel shopping cart",
-    "version" : "1.2",
+    "version" : "1.3",
     "keywords": [
         "Cart",
         "Shopping cart",

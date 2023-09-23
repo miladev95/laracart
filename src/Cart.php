@@ -98,6 +98,11 @@ class Cart
         return $this->source->destroy($product_id);
     }
 
+    public function removeAll()
+    {
+        $this->source->destroyAll();
+    }
+
 
     public function has($id)
     {

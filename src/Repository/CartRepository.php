@@ -17,5 +17,7 @@ interface CartRepository
 
     public function destroy($product_id);
 
+    public function destroyAll();
+
     public function validateItem(array $item);
 }

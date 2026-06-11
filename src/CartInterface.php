@@ -7,6 +7,8 @@ interface CartInterface
 
     public function getCart();
 
+    public function named(string $name);
+
     public function add(array $product);
 
     public function update(array $product);
@@ -24,4 +26,16 @@ interface CartInterface
     public function totalQuantity();
 
     public function getTotal();
+
+    public function getSubTotal();
+
+    public function applyCoupon(array $coupon);
+
+    public function removeCoupon();
+
+    public function hasCoupon();
+
+    public function getCoupon();
+
+    public function getDiscountAmount();
 }

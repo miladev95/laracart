@@ -141,6 +141,27 @@ $cart->named('cart3')->add([
 ]);
 ```
 
+### Coupons and Promo Codes
+
+Apply a cart-level coupon or promo code to reduce the cart total.
+
+```php
+$cart->applyCoupon([
+    'code'  => 'SAVE10',
+    'type'  => 'percentage', // or: fixed
+    'value' => 10,
+]);
+
+$discount = $cart->getDiscountAmount();
+$total = $cart->getTotal();
+```
+
+Remove an applied coupon:
+
+```php
+$cart->removeCoupon();
+```
+
 ## Future Features
 
 - Coupon and promo code support

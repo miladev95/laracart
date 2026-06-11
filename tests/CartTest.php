@@ -12,6 +12,8 @@ class CartTest extends TestCase
      */
     public function testInvalidArgumentExceptionOnInvalidCartName()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $cart = new Cart();
 
         $cart->setCart('');
@@ -42,6 +44,8 @@ class CartTest extends TestCase
      */
     public function testExceptionOnInvalidCartItem()
     {
+        $this->expectException(\Exception::class);
+
         $cart = new Cart('test');
 
         $cart->add(['id' => '123']);
@@ -267,6 +271,110 @@ class CartTest extends TestCase
         ]);
 
         $this->assertEquals(50100, $cart->getTotal());
+    }
+
+    public function testApplyPercentageCoupon()
+    {
+        $cart = new Cart('test');
+
+        $cart->add([
+            'id' => 123,
+            'name' => 'T-shirt',
+            'price' => 50,
+            'quantity' => 2,
+        ]);
+
+        $cart->applyCoupon([
+            'code' => 'SAVE10',
+            'type' => 'percentage',
+            'value' => 10,
+        ]);
+
+        $this->assertTrue($cart->hasCoupon());
+        $this->assertEquals('SAVE10', $cart->getCoupon()['code']);
+        $this->assertEquals(10.0, $cart->getDiscountAmount());
+        $this->assertEquals(90.0, $cart->getTotal());
+    }
+
+    public function testApplyFixedCoupon()
+    {
+        $cart = new Cart('test');
+
+        $cart->add([
+            'id' => 123,
+            'name' => 'T-shirt',
+            'price' => 50,
+            'quantity' => 2,
+        ]);
+
+        $cart->applyCoupon([
+            'code' => 'LESS15',
+            'type' => 'fixed',
+            'value' => 15,
+        ]);
+
+        $this->assertEquals(15.0, $cart->getDiscountAmount());
+        $this->assertEquals(85.0, $cart->getTotal());
+    }
+
+    public function testCouponDiscountCannotExceedSubtotal()
+    {
+        $cart = new Cart('test');
+
+        $cart->add([
+            'id' => 123,
+            'name' => 'T-shirt',
+            'price' => 50,
+            'quantity' => 2,
+        ]);
+
+        $cart->applyCoupon([
+            'code' => 'BIGSAVE',
+            'type' => 'fixed',
+            'value' => 500,
+        ]);
+
+        $this->assertEquals(100.0, $cart->getDiscountAmount());
+        $this->assertEquals(0.0, $cart->getTotal());
+    }
+
+    public function testRemoveCoupon()
+    {
+        $cart = new Cart('test');
+
+        $cart->add([
+            'id' => 123,
+            'name' => 'T-shirt',
+            'price' => 50,
+            'quantity' => 2,
+        ]);
+
+        $cart->applyCoupon([
+            'code' => 'SAVE10',
+            'type' => 'percentage',
+            'value' => 10,
+        ]);
+
+        $cart->removeCoupon();
+
+        $this->assertFalse($cart->hasCoupon());
+        $this->assertNull($cart->getCoupon());
+        $this->assertEquals(100.0, $cart->getTotal());
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testCouponCodeIsRequired()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        $cart = new Cart('test');
+
+        $cart->applyCoupon([
+            'type' => 'percentage',
+            'value' => 10,
+        ]);
     }
 
     public function testClearCart()

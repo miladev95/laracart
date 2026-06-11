@@ -70,6 +70,48 @@ class CollectionRepository extends IlluminateCollection implements CartRepositor
         return $this->insert($item);
     }
 
+    public function increaseQty($product_id)
+    {
+        $item = $this->findItem($product_id);
+
+        if (!$item) {
+            return null;
+        }
+
+        $item->quantity++;
+        $this->items[$product_id] = $item;
+
+        return $this->items;
+    }
+
+    public function decreaseQty($product_id)
+    {
+        $item = $this->findItem($product_id);
+
+        if (!$item) {
+            return null;
+        }
+
+        $item->quantity = max(1, $item->quantity - 1);
+        $this->items[$product_id] = $item;
+
+        return $this->items;
+    }
+
+    public function destroy($product_id)
+    {
+        unset($this->items[$product_id]);
+
+        return $this->items;
+    }
+
+    public function destroyAll()
+    {
+        $this->items = [];
+
+        return $this->items;
+    }
+
     /**
      * Verify all required fields are exist
      *

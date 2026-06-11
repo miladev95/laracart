@@ -27,6 +27,7 @@
     },
     "autoload-dev": {
         "psr-4": {
+            "Tests\\": "tests/",
             "Miladev\\Laracart\\Tests\\": "tests"
         }
     },
@@ -39,5 +40,11 @@
                 "Cart": "Miladev\\Laracart\\Facades\\Cart"
             }
         }
+    },
+    "require-dev": {
+        "illuminate/support": "^11.0",
+        "illuminate/session": "^11.0",
+        "illuminate/container": "^11.0",
+        "illuminate/events": "^11.0"
     }
 }

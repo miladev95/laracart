@@ -10,7 +10,7 @@ class CollectionTest extends TestCase
     public $cart;
     public $item;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -126,6 +126,8 @@ class CollectionTest extends TestCase
      */
     public function testValidateAnItem()
     {
+        $this->expectException(\Exception::class);
+
         $collection = new CollectionRepository();
 
         $collection->validateItem([

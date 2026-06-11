@@ -140,3 +140,27 @@ $cart->named('cart3')->add([
     'price'    => 100
 ]);
 ```
+
+## Future Features
+
+- Coupon and promo code support
+- Tax calculation per item and per cart
+- Discount rules and price modifiers
+- Shipping methods and shipping cost calculation
+- Cart fees such as handling or service fees
+- Guest cart to authenticated user cart merge
+- Cross-device cart synchronization
+- Wishlist and saved-for-later support
+- Cart item metadata and custom options
+- Product model association and auto-sync from database
+- Multiple cart instances with isolated totals
+- Cart events and hooks for extensibility
+- Currency support and locale-aware formatting
+- Bulk pricing and tiered pricing rules
+- Inventory and stock validation before checkout
+- Cart expiration and cleanup
+- Persistent storage drivers beyond session and database
+- API resources for headless and frontend integrations
+- Better validation and custom exceptions
+- Full test coverage for all cart operations
+- Support for the latest Laravel versions

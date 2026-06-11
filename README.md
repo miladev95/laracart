@@ -164,7 +164,6 @@ $cart->removeCoupon();
 
 ## Future Features
 
-- Coupon and promo code support
 - Tax calculation per item and per cart
 - Discount rules and price modifiers
 - Shipping methods and shipping cost calculation
